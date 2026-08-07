@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración · Sistema de Cobranzas</title>
+  <style>
+    :root {
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font);
+      font-size: 0.9rem;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button {
+      font-family: var(--font);
+      cursor: pointer;
+    }
+
+    input,
+    select,
+    textarea {
+      font-family: var(--font);
+    }
+
+    /* ===================== TOPBAR ===================== */
+    .topbar {
+      background-color: #0f172a;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar__brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+    }
+
+    .topbar__logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 0.5rem;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .topbar__actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .topbar__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 0.5rem;
+      background-color: transparent;
+      border: none;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .topbar__icon:hover {
+      background-color: #1e293b;
+      color: #ffffff;
+    }
+
+    .topbar__icon_dot {
+      position: absolute;
+      top: 0.4rem;
+      right: 0.4rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #ef4444;
+      border: 2px solid #0f172a;
+    }
+
+    .topbar__user {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding-left: 0.5rem;
+      border-left: 1px solid #1e293b;
+    }
+
+    .topbar__avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #60a5fa, #2563eb);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+
+    .topbar__username {
+      color: #e2e8f0;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* ===================== MAIN ===================== */
+    .main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 2rem;
+    }
+
+    /* ===================== TOOLBAR ===================== */
+    .toolbar {
+      padding: 0 0 1rem;
+    }
+
+    .toolbar__top {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 0.875rem;
+    }
+
+    .toolbar__search {
+      position: relative;
+      flex: 1;
+    }
+
+    .toolbar__search_icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      pointer-events: none;
+    }
+
+    .toolbar__input {
+      width: 100%;
+      padding: 0.625rem 0.875rem 0.625rem 2.5rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      background-color: #ffffff;
+      color: #0f172a;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .toolbar__input::placeholder {
+      color: #94a3b8;
+    }
+
+    .toolbar__input:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .toolbar__filters {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .toolbar__filters::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .toolbar__filters::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 2px;
+    }
+
+    .toolbar__filter {
+      padding: 0.5rem 0.875rem;
+      border: 1px solid #cbd5e1;
+      background-color: #ffffff;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      color: #475569;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .toolbar__filter:hover {
+      border-color: #2563eb;
+      color: #2563eb;
+    }
+
+    .toolbar__filter_active {
+      background-color: #1e40af;
+      border-color: #1e40af;
+      color: #ffffff;
+    }
+
+    .toolbar__filter_active:hover {
+      background-color: #1e3a8a;
+      color: #ffffff;
+    }
+
+    .toolbar__filter_count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 0.3rem;
+      border-radius: 9px;
+      background-color: #e2e8f0;
+      color: #475569;
+      font-size: 0.7rem;
+      font-weight: 600;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .toolbar__filter_active .toolbar__filter_count {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    .toolbar__filter_select {
+      padding: 0.5rem 1.8rem 0.5rem 0.875rem;
+      border: 1px solid #cbd5e1;
+      background-color: #ffffff;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      color: #475569;
+      white-space: nowrap;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23475569'%3E%3Cpath d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E");
+      background-position: right 0.6rem center;
+      background-repeat: no-repeat;
+      background-size: 14px;
+      cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .toolbar__filter_select:hover {
+      border-color: #2563eb;
+      color: #2563eb;
+    }
+
+    .toolbar__filter_select:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    /* ===================== CLIENTS ===================== */
+    .clients__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.875rem;
+    }
+
+    .clients__title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+    }
+
+    .clients__count {
+      font-size: 0.8rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .clients__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.875rem;
+    }
+
+    .client_card {
+      background-color: #ffffff;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e2e8f0;
+      transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+      animation: slide_up 0.5s ease backwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .client_card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background-color: transparent;
+      transition: background-color 0.2s ease;
+    }
+
+    .client_card_ok::before {
+      background-color: #10b981;
+    }
+
+    .client_card_warning::before {
+      background-color: #f59e0b;
+    }
+
+    .client_card_danger::before {
+      background-color: #ef4444;
+    }
+
+    .client_card:hover {
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
+      transform: translateY(-2px);
+      border-color: #cbd5e1;
+    }
+
+    @keyframes slide_up {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .client_card__header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: 0.875rem;
+      border-bottom: 1px solid #f1f5f9;
+      margin-bottom: 0.875rem;
+    }
+
+    .client_card__avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .client_card__identity {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .client_card__name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -0.01em;
+    }
+
+    .client_card__vendor {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 0.125rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .client_card__badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.25rem 0.55rem;
+      border-radius: 0.375rem;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .client_card__badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: currentColor;
+    }
+
+    .client_card__badge_ok {
+      background-color: #d1fae5;
+      color: #065f46;
+    }
+
+    .client_card__badge_warning {
+      background-color: #fef3c7;
+      color: #92400e;
+    }
+
+    .client_card__badge_danger {
+      background-color: #fee2e2;
+      color: #991b1b;
+    }
+
+    .client_card__body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem 0.875rem;
+      margin-bottom: 0.875rem;
+    }
+
+    .client_card__field {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .client_card__label {
+      font-size: 0.7rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+
+    .client_card__value {
+      font-size: 0.85rem;
+      color: #1e293b;
+      font-weight: 500;
+      margin-top: 0.125rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .client_card__value_strong {
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .client_card__value_muted {
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .client_card__progress {
+      margin-top: 0.25rem;
+      height: 4px;
+      background-color: #f1f5f9;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .client_card__progress_bar {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    .client_card__progress_bar_ok {
+      background-color: #10b981;
+    }
+
+    .client_card__progress_bar_warning {
+      background-color: #f59e0b;
+    }
+
+    .client_card__progress_bar_danger {
+      background-color: #ef4444;
+    }
+
+    .client_card__footer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .client_card__view {
+      padding: 0.45rem 0.75rem;
+      background-color: transparent;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.375rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #475569;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .client_card__view:hover {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      border-color: #94a3b8;
+    }
+
+    .client_card__edit {
+      padding: 0.45rem 0.875rem;
+      background-color: #2563eb;
+      color: #ffffff;
+      border: 1px solid #2563eb;
+      border-radius: 0.375rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .client_card__edit:hover {
+      background-color: #1d4ed8;
+      border-color: #1d4ed8;
+    }
+
+    .client_card__edit:active {
+      transform: scale(0.97);
+    }
+
+    /* ===================== MODAL ===================== */
+    .modal_overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .modal_overlay_open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background-color: #ffffff;
+      border-radius: 0.875rem;
+      width: 100%;
+      max-width: 580px;
+      max-height: 92vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(20px) scale(0.96);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .modal_overlay_open .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid #e2e8f0;
+      background-color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .modal__title_group {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+
+    .modal__title_icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 0.4rem;
+      background-color: #dbeafe;
+      color: #1d4ed8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal__title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+    }
+
+    .modal__subtitle {
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 0.1rem;
+    }
+
+    .modal__close {
+      background-color: transparent;
+      border: none;
+      color: #64748b;
+      width: 32px;
+      height: 32px;
+      border-radius: 0.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .modal__close:hover {
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+
+    .modal__body {
+      overflow-y: auto;
+      padding: 1.25rem;
+      flex: 1;
+    }
+
+    .modal__body::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .modal__body::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 3px;
+    }
+
+    .modal__section {
+      margin-bottom: 1.25rem;
+    }
+
+    .modal__section:last-child {
+      margin-bottom: 0;
+    }
+
+    .modal__section_title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #2563eb;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.625rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .modal__row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.875rem;
+    }
+
+    .modal__field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .modal__label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .modal__label_required {
+      color: #ef4444;
+    }
+
+    .modal__input,
+    .modal__select,
+    .modal__textarea {
+      padding: 0.55rem 0.7rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.4rem;
+      font-size: 0.85rem;
+      background-color: #ffffff;
+      color: #0f172a;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      width: 100%;
+    }
+
+    .modal__input:focus,
+    .modal__select:focus,
+    .modal__textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .modal__textarea {
+      resize: vertical;
+      min-height: 70px;
+      font-family: var(--font);
+    }
+
+    .modal__select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2364748b'%3E%3Cpath d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E");
+      background-position: right 0.6rem center;
+      background-repeat: no-repeat;
+      background-size: 16px;
+      padding-right: 2rem;
+    }
+
+    .modal__status_grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+    .modal__status_option {
+      padding: 0.55rem 0.5rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 0.4rem;
+      background-color: #ffffff;
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #475569;
+      transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .modal__status_option:hover {
+      border-color: #94a3b8;
+    }
+
+    .modal__status_dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .modal__status_option_ok .modal__status_dot {
+      background-color: #10b981;
+    }
+
+    .modal__status_option_warning .modal__status_dot {
+      background-color: #f59e0b;
+    }
+
+    .modal__status_option_danger .modal__status_dot {
+      background-color: #ef4444;
+    }
+
+    .modal__status_option_active_ok {
+      border-color: #10b981;
+      background-color: #ecfdf5;
+      color: #065f46;
+    }
+
+    .modal__status_option_active_warning {
+      border-color: #f59e0b;
+      background-color: #fffbeb;
+      color: #92400e;
+    }
+
+    .modal__status_option_active_danger {
+      border-color: #ef4444;
+      background-color: #fef2f2;
+      color: #991b1b;
+    }
+
+    .modal__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.875rem 1.25rem;
+      border-top: 1px solid #e2e8f0;
+      background-color: #f8fafc;
+      flex-shrink: 0;
+    }
+
+    .modal__hint {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .modal__actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .modal__btn {
+      padding: 0.55rem 1rem;
+      border-radius: 0.4rem;
+      font-size: 0.825rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .modal__btn:active {
+      transform: scale(0.97);
+    }
+
+    .modal__btn_secondary {
+      background-color: #ffffff;
+      border-color: #cbd5e1;
+      color: #475569;
+    }
+
+    .modal__btn_secondary:hover {
+      background-color: #f1f5f9;
+      border-color: #94a3b8;
+      color: #0f172a;
+    }
+
+    .modal__btn_primary {
+      background-color: #2563eb;
+      color: #ffffff;
+      border-color: #2563eb;
+    }
+
+    .modal__btn_primary:hover {
+      background-color: #1d4ed8;
+      border-color: #1d4ed8;
+    }
+
+    /* ===================== FOOTER ===================== */
+    .footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      color: #94a3b8;
+      font-size: 0.78rem;
+      border-top: 1px solid #e2e8f0;
+      background-color: #ffffff;
+    }
+
+    .footer__strong {
+      color: #475569;
+      font-weight: 600;
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media(min-width:640px) {
+      .topbar {
+        padding: 0.75rem 1.5rem;
+      }
+
+      .main {
+        padding: 1.5rem 1.5rem 2rem;
+      }
+
+      .toolbar__top {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .toolbar__search {
+        max-width: 340px;
+      }
+
+      .clients__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .modal__row_two {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer {
+        padding: 1.5rem;
+      }
+    }
+
+    @media(min-width:1024px) {
+      .main {
+        padding: 1.5rem 2rem 2rem;
+      }
+
+      .clients__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .modal__row_three {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media(min-width:1280px) {
+      .clients__grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="topbar__brand">
+      <div class="topbar__logo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 3v18h18" />
+          <path d="M7 14l4-4 4 4 5-5" />
+        </svg>
+      </div>
+      <span>CobranzasPro</span>
+    </div>
+    <div class="topbar__actions">
+      <button class="topbar__icon" aria-label="Notificaciones">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+        </svg>
+        <span class="topbar__icon_dot"></span>
+      </button>
+      <button class="topbar__icon" aria-label="Configuración">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+        </svg>
+      </button>
+      <div class="topbar__user">
+        <div class="topbar__avatar">JP</div>
+        <span class="topbar__username">Juan Pérez</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <section class="toolbar" aria-label="Buscador y filtros">
+      <div class="toolbar__top">
+        <div class="toolbar__search">
+          <span class="toolbar__search_icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </span>
+          <input type="text" class="toolbar__input" id="search_input" placeholder="Buscar cliente por nombre...">
+        </div>
+        <div class="toolbar__filters" role="tablist">
+          <button class="toolbar__filter toolbar__filter_active" data-filter="all">
+            Todos <span class="toolbar__filter_count" data-count="all">0</span>
+          </button>
+          <button class="toolbar__filter" data-filter="ok">
+            Al día <span class="toolbar__filter_count" data-count="ok">0</span>
+          </button>
+          <button class="toolbar__filter" data-filter="warning">
+            Próximas a vencer <span class="toolbar__filter_count" data-count="warning">0</span>
+          </button>
+          <button class="toolbar__filter" data-filter="danger">
+            Vencidos <span class="toolbar__filter_count" data-count="danger">0</span>
+          </button>
+          <select class="toolbar__filter_select" id="vendor_select">
+            <option value="all">Todos los vendedores</option>
+            <option value="Carlos Ruiz">Carlos Ruiz</option>
+            <option value="Ana Torres">Ana Torres</option>
+            <option value="Luis Mora">Luis Mora</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="clients" aria-label="Listado de clientes">
+      <div class="clients__header">
+        <h2 class="clients__title">Clientes</h2>
+        <span class="clients__count" id="clients_count">Mostrando 0 de 0</span>
+      </div>
+
+      <div class="clients__grid" id="clients_grid"></div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p><span class="footer__strong">CobranzasPro</span> · Sistema de gestión de ventas y cobranzas · v2.4.1 · © 2024</p>
+  </footer>
+
+  <div class="modal_overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal_title">
+    <div class="modal">
+
+      <div class="modal__header">
+        <div class="modal__title_group">
+          <div class="modal__title_icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="modal__title" id="modal_title">Editar cliente</h2>
+            <p class="modal__subtitle">Modifica la información de la cuenta</p>
+          </div>
+        </div>
+        <button class="modal__close" data-close aria-label="Cerrar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+
+      <form class="modal__body" onsubmit="return false;">
+
+        <div class="modal__section">
+          <h3 class="modal__section_title">Datos personales</h3>
+          <div class="modal__row modal__row_two">
+            <div class="modal__field">
+              <label class="modal__label" for="f_name">Nombre completo <span
+                  class="modal__label_required">*</span></label>
+              <input type="text" id="f_name" class="modal__input" value="María González">
+            </div>
+            <div class="modal__field">
+              <label class="modal__label" for="f_dni">DNI <span class="modal__label_required">*</span></label>
+              <input type="text" id="f_dni" class="modal__input" value="12.345.678">
+            </div>
+          </div>
+          <div class="modal__row modal__row_two" style="margin-top:0.875rem;">
+            <div class="modal__field">
+              <label class="modal__label" for="f_phone">Teléfono</label>
+              <input type="tel" id="f_phone" class="modal__input" value="+54 11 5544-7788">
+            </div>
+            <div class="modal__field">
+              <label class="modal__label" for="f_email">Correo electrónico</label>
+              <input type="email" id="f_email" class="modal__input" value="maria.gonzalez@email.com">
+            </div>
+          </div>
+        </div>
+
+        <div class="modal__section">
+          <h3 class="modal__section_title">Asignación comercial</h3>
+          <div class="modal__row modal__row_two">
+            <div class="modal__field">
+              <label class="modal__label" for="f_vendor">Vendedor asignado <span
+                  class="modal__label_required">*</span></label>
+              <select id="f_vendor" class="modal__select">
+                <option>Carlos Ruiz</option>
+                <option selected>Carlos Ruiz</option>
+                <option>Ana Torres</option>
+                <option>Luis Mora</option>
+                <option>Patricia Díaz</option>
+              </select>
+            </div>
+            <div class="modal__field">
+              <label class="modal__label" for="f_plan">Plan / Producto</label>
+              <select id="f_plan" class="modal__select">
+                <option selected>Plan Premium 12 cuotas</option>
+                <option>Plan Estándar 10 cuotas</option>
+                <option>Plan Básico 6 cuotas</option>
+                <option>Plan Empresarial 24 cuotas</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal__section">
+          <h3 class="modal__section_title">Estado de la cuenta</h3>
+          <div class="modal__field" style="margin-bottom:0.875rem;">
+            <label class="modal__label">Estado actual</label>
+            <div class="modal__status_grid">
+              <button type="button" class="modal__status_option modal__status_option_ok modal__status_option_active_ok">
+                <span class="modal__status_dot"></span>
+                Al día
+              </button>
+              <button type="button" class="modal__status_option modal__status_option_warning">
+                <span class="modal__status_dot"></span>
+                Próxima a vencer
+              </button>
+              <button type="button" class="modal__status_option modal__status_option_danger">
+                <span class="modal__status_dot"></span>
+                Vencido
+              </button>
+            </div>
+          </div>
+          <div class="modal__row modal__row_three">
+            <div class="modal__field">
+              <label class="modal__label" for="f_paid">Cuotas pagadas</label>
+              <input type="number" id="f_paid" class="modal__input" value="8">
+            </div>
+            <div class="modal__field">
+              <label class="modal__label" for="f_total">Cuotas totales</label>
+              <input type="number" id="f_total" class="modal__input" value="12">
+            </div>
+            <div class="modal__field">
+              <label class="modal__label" for="f_balance">Saldo pendiente</label>
+              <input type="text" id="f_balance" class="modal__input" value="$4,500">
+            </div>
+          </div>
+          <div class="modal__row modal__row_two" style="margin-top:0.875rem;">
+            <div class="modal__field">
+              <label class="modal__label" for="f_last">Último pago</label>
+              <input type="date" id="f_last" class="modal__input" value="2024-10-15">
+            </div>
+            <div class="modal__field">
+              <label class="modal__label" for="f_next">Próximo vencimiento</label>
+              <input type="date" id="f_next" class="modal__input" value="2024-11-15">
+            </div>
+          </div>
+        </div>
+
+        <div class="modal__section">
+          <h3 class="modal__section_title">Observaciones</h3>
+          <div class="modal__field">
+            <label class="modal__label" for="f_notes">Notas internas</label>
+            <textarea id="f_notes"
+              class="modal__textarea">Cliente puntual con sus pagos. Solicita recordatorio por WhatsApp 3 días antes del vencimiento.</textarea>
+          </div>
+        </div>
+
+      </form>
+
+      <div class="modal__footer">
+        <span class="modal__hint">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          Los cambios se aplicarán inmediatamente
+        </span>
+        <div class="modal__actions">
+          <button class="modal__btn modal__btn_secondary" data-close>Cancelar</button>
+          <button class="modal__btn modal__btn_primary" data-close>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Guardar cambios
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    function getDateOffset(offset) {
+      if (offset === null) return null;
+      const d = new Date(today);
+      d.setDate(d.getDate() + offset);
+      return d;
+    }
+
+    function formatDate(date) {
+      if (!date) return "Cancelado";
+      const options = { day: '2-digit', month: 'short', year: 'numeric' };
+      const str = date.toLocaleDateString('es-ES', options).replace('.', '');
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    function getStatus(nextDue, balance) {
+      if (balance === "$0" || !nextDue) return "ok";
+      const diffDays = Math.floor((nextDue - today) / (1000 * 60 * 60 * 24));
+      if (diffDays < 0) return "danger";
+      if (diffDays <= 7) return "warning";
+      return "ok";
+    }
+
+    const clientsData = [
+      { initials: "MG", name: "María González", vendor: "Carlos Ruiz", avatarBg: "#dbeafe", avatarColor: "#1d4ed8", paid: 8, total: 12, balance: "$4,500", lastPayment: -10, nextDue: 20 },
+      { initials: "RS", name: "Roberto Sánchez", vendor: "Ana Torres", avatarBg: "#fef3c7", avatarColor: "#92400e", paid: 6, total: 12, balance: "$9,000", lastPayment: -15, nextDue: 4 },
+      { initials: "LM", name: "Laura Méndez", vendor: "Carlos Ruiz", avatarBg: "#fee2e2", avatarColor: "#991b1b", paid: 3, total: 12, balance: "$13,500", lastPayment: -45, nextDue: -10 },
+      { initials: "PR", name: "Pedro Rojas", vendor: "Ana Torres", avatarBg: "#d1fae5", avatarColor: "#065f46", paid: 12, total: 12, balance: "$0", lastPayment: -5, nextDue: null },
+      { initials: "CV", name: "Carmen Vega", vendor: "Luis Mora", avatarBg: "#e0e7ff", avatarColor: "#4338ca", paid: 5, total: 10, balance: "$7,500", lastPayment: -12, nextDue: 6 },
+      { initials: "JL", name: "Javier López", vendor: "Luis Mora", avatarBg: "#fce7f3", avatarColor: "#9d174d", paid: 2, total: 12, balance: "$15,000", lastPayment: -55, nextDue: -25 },
+      { initials: "SC", name: "Sofía Castro", vendor: "Carlos Ruiz", avatarBg: "#cffafe", avatarColor: "#155e75", paid: 9, total: 12, balance: "$3,000", lastPayment: -2, nextDue: 28 },
+      { initials: "DM", name: "Diego Morales", vendor: "Ana Torres", avatarBg: "#ffedd5", avatarColor: "#9a3412", paid: 7, total: 15, balance: "$12,000", lastPayment: -8, nextDue: 3 },
+      { initials: "PC", name: "Patricia Castro", vendor: "Luis Mora", avatarBg: "#ede9fe", avatarColor: "#5b21b6", paid: 4, total: 10, balance: "$9,000", lastPayment: -30, nextDue: -2 }
+    ];
+
+    clientsData.forEach(c => {
+      c.lastPayment = getDateOffset(c.lastPayment);
+      c.nextDue = c.nextDue === null ? null : getDateOffset(c.nextDue);
+    });
+
+    const grid = document.getElementById('clients_grid');
+    const clientsCount = document.getElementById('clients_count');
+
+    let statusFilter = "all";
+    let vendorFilter = "all";
+    let searchText = "";
+
+    function renderCards() {
+      grid.innerHTML = "";
+      clientsData.forEach((client, index) => {
+        const status = getStatus(client.nextDue, client.balance);
+        const statusInfo = {
+          ok: { text: "Al día", class: "ok", barClass: "ok" },
+          warning: { text: "Próxima a vencer", class: "warning", barClass: "warning" },
+          danger: { text: "Vencido", class: "danger", barClass: "danger" }
+        }[status];
+
+        const progressWidth = (client.paid / client.total) * 100;
+        const nextDueText = client.nextDue ? formatDate(client.nextDue) : "Cancelado";
+        const lastPayText = formatDate(client.lastPayment);
+
+        const html = `
+        <article class="client_card client_card_${statusInfo.class}" data-status="${status}" data-vendor="${client.vendor}" data-name="${client.name.toLowerCase()}" style="animation-delay:${0.05 * index}s">
+          <div class="client_card__header">
+            <div class="client_card__avatar" style="background-color:${client.avatarBg};color:${client.avatarColor};">${client.initials}</div>
+            <div class="client_card__identity">
+              <h3 class="client_card__name">${client.name}</h3>
+              <p class="client_card__vendor">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                ${client.vendor}
+              </p>
+            </div>
+            <span class="client_card__badge client_card__badge_${statusInfo.class}">${statusInfo.text}</span>
+          </div>
+          <div class="client_card__body">
+            <div class="client_card__field">
+              <span class="client_card__label">Cuotas</span>
+              <span class="client_card__value client_card__value_strong">${client.paid} / ${client.total}</span>
+              <div class="client_card__progress"><div class="client_card__progress_bar client_card__progress_bar_${statusInfo.barClass}" style="width:${progressWidth}%;"></div></div>
+            </div>
+            <div class="client_card__field">
+              <span class="client_card__label">Saldo pendiente</span>
+              <span class="client_card__value client_card__value_strong">${client.balance}</span>
+            </div>
+            <div class="client_card__field">
+              <span class="client_card__label">Último pago</span>
+              <span class="client_card__value">${lastPayText}</span>
+            </div>
+            <div class="client_card__field">
+              <span class="client_card__label">Próx. vencimiento</span>
+              <span class="client_card__value client_card__value_muted">${nextDueText}</span>
+            </div>
+          </div>
+          <div class="client_card__footer">
+            <button class="client_card__view">Ver detalle</button>
+            <button class="client_card__edit" data-edit>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Editar
+            </button>
+          </div>
+        </article>
+      `;
+        grid.insertAdjacentHTML('beforeend', html);
+      });
+    }
+
+    function updateCounts() {
+      const counts = { all: clientsData.length, ok: 0, warning: 0, danger: 0 };
+      clientsData.forEach(c => {
+        const status = getStatus(c.nextDue, c.balance);
+        counts[status]++;
+      });
+      document.querySelector('[data-count="all"]').textContent = counts.all;
+      document.querySelector('[data-count="ok"]').textContent = counts.ok;
+      document.querySelector('[data-count="warning"]').textContent = counts.warning;
+      document.querySelector('[data-count="danger"]').textContent = counts.danger;
+    }
+
+    function applyFilters() {
+      const cards = document.querySelectorAll('.client_card');
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const status = card.dataset.status;
+        const vendor = card.dataset.vendor;
+        const name = card.dataset.name;
+
+        const statusMatch = statusFilter === "all" || status === statusFilter;
+        const vendorMatch = vendorFilter === "all" || vendor === vendorFilter;
+        const searchMatch = name.includes(searchText);
+
+        if (statusMatch && vendorMatch && searchMatch) {
+          card.style.display = "";
+          visibleCount++;
+        } else {
+          card.style.display = "none";
+        }
+      });
+      clientsCount.textContent = `Mostrando ${visibleCount} de ${clientsData.length}`;
+    }
+
+    renderCards();
+    updateCounts();
+    applyFilters();
+
+    document.querySelectorAll('.toolbar__filter[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.toolbar__filter[data-filter]').forEach(b => b.classList.remove('toolbar__filter_active'));
+        btn.classList.add('toolbar__filter_active');
+        statusFilter = btn.dataset.filter;
+        applyFilters();
+      });
+    });
+
+    document.getElementById('vendor_select').addEventListener('change', (e) => {
+      vendorFilter = e.target.value;
+      applyFilters();
+    });
+
+    document.getElementById('search_input').addEventListener('input', (e) => {
+      searchText = e.target.value.toLowerCase();
+      applyFilters();
+    });
+
+    // Modal logic
+    const modal = document.getElementById('modal');
+    const closeButtons = document.querySelectorAll('[data-close]');
+    const statusOptions = document.querySelectorAll('.modal__status_option');
+
+    const openModal = () => {
+      modal.classList.add('modal_overlay_open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+      modal.classList.remove('modal_overlay_open');
+      document.body.style.overflow = '';
+    };
+
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('[data-edit]')) {
+        openModal();
+      }
+    });
+
+    closeButtons.forEach(btn => btn.addEventListener('click', closeModal));
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('modal_overlay_open')) {
+        closeModal();
+      }
+    });
+
+    statusOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        statusOptions.forEach(o => {
+          o.classList.remove('modal__status_option_active_ok');
+          o.classList.remove('modal__status_option_active_warning');
+          o.classList.remove('modal__status_option_active_danger');
+        });
+        if (option.classList.contains('modal__status_option_ok')) {
+          option.classList.add('modal__status_option_active_ok');
+        } else if (option.classList.contains('modal__status_option_warning')) {
+          option.classList.add('modal__status_option_active_warning');
+        } else if (option.classList.contains('modal__status_option_danger')) {
+          option.classList.add('modal__status_option_active_danger');
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>

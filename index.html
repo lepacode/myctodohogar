@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo para el hogar — Financiaciones</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+     HEADER
+========================================= -->
+    <header class="header" id="header" role="banner">
+        <div class="header__left">
+            <a class="header__logo" href="#" aria-label="Inicio">
+                <img src="assets/logo.webp" alt="Equipamientos Comerciales" class="logo__img">
+            </a>
+        </div>
+        <button class="header__user" aria-label="Actualizar página">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header__user__icon">
+                <path d="M21 2v6h-6"></path>
+                <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+                <path d="M3 22v-6h6"></path>
+                <path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path>
+            </svg>
+        </button>
+    </header>
+
+    <button class="pedido-btn" id="pedidoBtn">Ver Pedido</button>
+
+    <!-- =========================================
+     MAIN
+========================================= -->
+    <main>
+
+        <section class="categorias" id="section-categorias">
+            <p class="financiacion-promo__texto">
+                Trabajamos con financiación <strong>diaria</strong>, <strong>semanal</strong> y todas las
+                <strong>tarjetas de crédito</strong>. Consultanos por el <em>plan ideal para vos</em>.
+            </p>
+            <h5 class="categorias__titulo">Buscá por categorías</h5>
+            <div class="categoria__item">
+                <button class="categoria__button" data-categoria="todo">Todo</button>
+                <button class="categoria__button" data-categoria="ofertas">Ofertas</button>
+                <button class="categoria__button" data-categoria="novedades">Novedades</button>
+                <button class="categoria__button" data-categoria="accesorios">Accesorios</button>
+                <button class="categoria__button" data-categoria="auriculares">Auriculares</button>
+                <button class="categoria__button" data-categoria="cocina">Cocina</button>
+                <button class="categoria__button" data-categoria="entretenimiento">Entretenimiento</button>
+                <button class="categoria__button" data-categoria="hogar">Hogar</button>
+                <button class="categoria__button" data-categoria="parlantes">Parlantes</button>
+            </div>
+        </section>
+
+        <section class="buscador">
+            <div class="buscador__contenedor">
+                <input type="text" class="buscador__input" placeholder="Buscar">
+            </div>
+        </section>
+
+        <section class="articulos" id="contenedor-articulos">
+            <div class="articulos__contenedor">
+                <!-- ============ ACCESORIOS ============ -->
+                <div class="articulos__item" data-categoria="accesorios">
+                    <h4 class="articulos_name">Pulsera Trackfit Negra</h4>
+                    <img class="articulos__img" src="assets/productos/accesorios/pulsera_actividad_negra_trackfit.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Monitoreá tu actividad diaria con estilo y comodidad.</p>
+                    <h5 class="articulos__precio">$38.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="accesorios">
+                    <h4 class="articulos_name">Reloj Nova Correas</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/accesorios/reloj_correas_intercambiables_nova.webp" alt="">
+                    <p class="articulos__descripcion">Correas intercambiables para un look siempre renovado.</p>
+                    <h5 class="articulos__precio">$45.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="accesorios">
+                    <h4 class="articulos_name">Reloj Naturetech Mariposa</h4>
+                    <img class="articulos__img" src="assets/productos/accesorios/reloj_fondo_mariposa_naturetech.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Elegancia natural con fondo de mariposa único.</p>
+                    <h5 class="articulos__precio">$52.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="accesorios">
+                    <h4 class="articulos_name">Smartwatch Zenfit Rosa</h4>
+                    <img class="articulos__img" src="assets/productos/accesorios/reloj_inteligente_rosa_zenfit.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Diseño rosa elegante con funciones inteligentes.</p>
+                    <h5 class="articulos__precio">$42.800</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="accesorios">
+                    <h4 class="articulos_name">Reloj Techtime Malla</h4>
+                    <img class="articulos__img" src="assets/productos/accesorios/reloj_malla_metalica_techtime.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Malla metálica premium para un estilo moderno.</p>
+                    <h5 class="articulos__precio">$48.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="accesorios">
+                    <h4 class="articulos_name">Smartwatch Quantum HD</h4>
+                    <img class="articulos__img" src="assets/productos/accesorios/reloj_pantalla_hd_quantum.webp" alt="">
+                    <p class="articulos__descripcion">Pantalla HD de alto brillo y colores vibrantes.</p>
+                    <h5 class="articulos__precio">$55.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="accesorios">
+                    <h4 class="articulos_name">Smartwatch Spectra Cuadrado</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/accesorios/smartwatch_cuadrado_moderno_spectra.webp" alt="">
+                    <p class="articulos__descripcion">Diseño cuadrado moderno con excelente rendimiento.</p>
+                    <h5 class="articulos__precio">$49.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="accesorios">
+                    <h4 class="articulos_name">Smartwatch Aero Deportivo</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/accesorios/smartwatch_deportivo_elegante_aero.webp" alt="">
+                    <p class="articulos__descripcion">Deportivo y elegante, ideal para tu rutina activa.</p>
+                    <h5 class="articulos__precio">$44.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="accesorios">
+                    <h4 class="articulos_name">Smartwatch Lumina Color</h4>
+                    <img class="articulos__img" src="assets/productos/accesorios/smartwatch_iconos_color_lumina.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Iconos a color y una interfaz súper intuitiva.</p>
+                    <h5 class="articulos__precio">$41.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="accesorios">
+                    <h4 class="articulos_name">Smartwatch Pulsar Sport</h4>
+                    <img class="articulos__img" src="assets/productos/accesorios/smartwatch_redondo_sport_pulsar.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Redondo deportivo con monitoreo de salud avanzado.</p>
+                    <h5 class="articulos__precio">$47.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+
+                <!-- ============ AURICULARES (BT) ============ -->
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares AirPlus Blancos</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/bluetooth/auriculares_blancos_estilo_pod_airplus.webp" alt="">
+                    <p class="articulos__descripcion">Estilo pod, blancos y con sonido envolvente.</p>
+                    <h5 class="articulos__precio">$19.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares Pro Motion</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/bluetooth/auriculares_deportivos_pro_motion.webp" alt="">
+                    <p class="articulos__descripcion">Deportivos in-ear con ajuste seguro y gran sonido.</p>
+                    <h5 class="articulos__precio">$24.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares BattPower LED</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/bluetooth/auriculares_display_led_battpower.webp" alt="">
+                    <p class="articulos__descripcion">Display LED con indicador de batería inteligente.</p>
+                    <h5 class="articulos__precio">$22.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares Soundcore</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/bluetooth/auriculares_estuche_alto_soundcore.webp" alt="">
+                    <p class="articulos__descripcion">Estuche alargado con carga rápida y gran autonomía.</p>
+                    <h5 class="articulos__precio">$28.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares Predator Gamer</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/bluetooth/auriculares_gamer_led_cyan_predator.webp" alt="">
+                    <p class="articulos__descripcion">Estilo gamer con LED cyan y sonido envolvente.</p>
+                    <h5 class="articulos__precio">$34.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares Volt Compactos</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/bluetooth/auriculares_in_ear_compactos_volt.webp" alt="">
+                    <p class="articulos__descripcion">In-ear compactos y potentes para tu día a día.</p>
+                    <h5 class="articulos__precio">$15.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares Microdot</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/bluetooth/auriculares_mini_negros_microdot.webp" alt="">
+                    <p class="articulos__descripcion">Miniatura discreta con sonido de alta definición.</p>
+                    <h5 class="articulos__precio">$12.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares QSound Píldora</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/bluetooth/auriculares_pildora_negra_qsound.webp" alt="">
+                    <p class="articulos__descripcion">Formato píldora con graves profundos y nítidos.</p>
+                    <h5 class="articulos__precio">$18.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares RunPro Sport</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/bluetooth/auriculares_sport_gancho_runpro.webp" alt="">
+                    <p class="articulos__descripcion">Gancho deportivo antideslizante para tus entrenamientos.</p>
+                    <h5 class="articulos__precio">$21.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares Stealth Mini</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/bluetooth/auriculares_ultra_mini_stealth.webp" alt="">
+                    <p class="articulos__descripcion">Ultra mini invisibles con gran calidad de audio.</p>
+                    <h5 class="articulos__precio">$16.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <!-- ============ AURICULARES (VINCHA) ============ -->
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares Airmax Aluminio</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/vincha/auriculares_vincha_aluminio_blanco_airmax.webp" alt="">
+                    <p class="articulos__descripcion">Vincha aluminio blanco con sonido premium.</p>
+                    <h5 class="articulos__precio">$32.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares CloudSound</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/vincha/auriculares_vincha_blanco_puro_cloudsound.webp" alt="">
+                    <p class="articulos__descripcion">Blanco puro con sonido nítido y almohadillas suaves.</p>
+                    <h5 class="articulos__precio">$35.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares QSound DJ</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/vincha/auriculares_vincha_dj_estudio_qsound.webp" alt="">
+                    <p class="articulos__descripcion">DJ profesional con sonido de estudio y gran aislamiento.</p>
+                    <h5 class="articulos__precio">$42.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares Sonyx Ergo</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/vincha/auriculares_vincha_ergonomico_sonyx.webp" alt="">
+                    <p class="articulos__descripcion">Ergonómicos con diadema ajustable para máxima comodidad.</p>
+                    <h5 class="articulos__precio">$38.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares XTech Gamer</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/vincha/auriculares_vincha_gamer_rgb_xtech.webp" alt="">
+                    <p class="articulos__descripcion">RGB gamer con micrófono y surround virtual.</p>
+                    <h5 class="articulos__precio">$48.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares AudioPro</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/vincha/auriculares_vincha_ligero_negro_audiopro.webp" alt="">
+                    <p class="articulos__descripcion">Ligeros y plegables, ideales para llevar a todas partes.</p>
+                    <h5 class="articulos__precio">$28.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares SoundMax</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/vincha/auriculares_vincha_negro_mate_soundmax.webp" alt="">
+                    <p class="articulos__descripcion">Negro mate con sonido potente y diseño minimalista.</p>
+                    <h5 class="articulos__precio">$34.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares BunnyBeat</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/vincha/auriculares_vincha_orejas_conejo_bunnybeat.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Divertido diseño orejas de conejo con gran sonido.</p>
+                    <h5 class="articulos__precio">$39.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares MeowTech</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/vincha/auriculares_vincha_orejas_gato_meowtech.webp" alt="">
+                    <p class="articulos__descripcion">Estilo orejas de gato con luces y sonido envolvente.</p>
+                    <h5 class="articulos__precio">$39.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares BassLine</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/vincha/auriculares_vincha_plegable_negro_bassline.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Plegables con graves potentes y diseño portátil.</p>
+                    <h5 class="articulos__precio">$29.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="auriculares">
+                    <h4 class="articulos_name">Auriculares SoundWave</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/auriculares/vincha/auriculares_vincha_premium_plata_soundwave.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Premium plata con sonido de alta fidelidad.</p>
+                    <h5 class="articulos__precio">$45.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+
+                <!-- ============ COCINA ============ -->
+                <div class="articulos__item" data-categoria="cocina">
+                    <h4 class="articulos_name">Balanza Digital Precisa</h4>
+                    <img class="articulos__img" src="assets/productos/cocina/balanza_digital_vidrio_precisa.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Balanza de vidrio con medición precisa hasta 10 kg.</p>
+                    <h5 class="articulos__precio">$15.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="cocina">
+                    <h4 class="articulos_name">Juguera JuicePro Acero</h4>
+                    <img class="articulos__img" src="assets/productos/cocina/juguera_centrifuga_acero_juicepro.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Juguera centrífuga de acero con motor potente.</p>
+                    <h5 class="articulos__precio">$45.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="cocina">
+                    <h4 class="articulos_name">Licuadora BlendMax Roja</h4>
+                    <img class="articulos__img" src="assets/productos/cocina/licuadora_roja_vidrio_blendmax.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Licuadora roja con jarra de vidrio y cuchillas de acero.</p>
+                    <h5 class="articulos__precio">$35.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="cocina">
+                    <h4 class="articulos_name">Olla CookMax Presión</h4>
+                    <img class="articulos__img" src="assets/productos/cocina/olla_presion_rapida_cookmax.webp" alt="">
+                    <p class="articulos__descripcion">Olla a presión rápida con sistema de seguridad.</p>
+                    <h5 class="articulos__precio">$42.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="cocina">
+                    <h4 class="articulos_name">Pava Tradición Aluminio</h4>
+                    <img class="articulos__img" src="assets/productos/cocina/pava_aluminio_clasica_tradicion.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Pava de aluminio clásica para el mate de todos los días.</p>
+                    <h5 class="articulos__precio">$12.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="cocina">
+                    <h4 class="articulos_name">Set Cubiertos DineMaster</h4>
+                    <img class="articulos__img" src="assets/productos/cocina/set_cubiertos_rojos_dinemaster.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Set de cubiertos rojos con diseño moderno y resistente.</p>
+                    <h5 class="articulos__precio">$24.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="cocina">
+                    <h4 class="articulos_name">Set Matero Mateando</h4>
+                    <img class="articulos__img" src="assets/productos/cocina/set_mate_bolso_cuero_mateando.webp" alt="">
+                    <p class="articulos__descripcion">Bolso de cuero con set completo para matear donde quieras.</p>
+                    <h5 class="articulos__precio">$32.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="cocina">
+                    <h4 class="articulos_name">Set Ollas ChefPro</h4>
+                    <img class="articulos__img" src="assets/productos/cocina/set_ollas_rojas_chefpro.webp" alt="">
+                    <p class="articulos__descripcion">Set de ollas rojas antiadherentes para tu cocina.</p>
+                    <h5 class="articulos__precio">$55.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="cocina">
+                    <h4 class="articulos_name">Termo Thermax Acero</h4>
+                    <img class="articulos__img" src="assets/productos/cocina/termo_acero_manija_thermax.webp" alt="">
+                    <p class="articulos__descripcion">Termo de acero con manija y gran capacidad térmica.</p>
+                    <h5 class="articulos__precio">$28.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="cocina">
+                    <h4 class="articulos_name">Tostadora ToastIT Roja</h4>
+                    <img class="articulos__img" src="assets/productos/cocina/tostadora_roja_dos_ranuras_toastit.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Tostadora roja 2 ranuras con control de temperatura.</p>
+                    <h5 class="articulos__precio">$38.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+
+                <!-- ============ ENTRETENIMIENTO ============ -->
+                <div class="articulos__item" data-categoria="entretenimiento">
+                    <h4 class="articulos_name">Aro Luz SelfiePro</h4>
+                    <img class="articulos__img" src="assets/productos/entretenimiento/aro_luz_tripode_selfiepro.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Aro de luz con trípode para fotos y videos perfectos.</p>
+                    <h5 class="articulos__precio">$28.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="entretenimiento">
+                    <h4 class="articulos_name">Cámara ExtremePro</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/entretenimiento/camara_accion_deportiva_extremepro.webp" alt="">
+                    <p class="articulos__descripcion">Cámara de acción 4K resistente al agua y golpes.</p>
+                    <h5 class="articulos__precio">$185.000</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="entretenimiento">
+                    <h4 class="articulos_name">Consola Retro SupBox</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/entretenimiento/consola_retro_portatil_supbox.webp" alt="">
+                    <p class="articulos__descripcion">Consola portátil con cientos de juegos retro incorporados.</p>
+                    <h5 class="articulos__precio">$55.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="entretenimiento">
+                    <h4 class="articulos_name">Gamepad Control Negro</h4>
+                    <img class="articulos__img" src="assets/productos/entretenimiento/control_play_negro_gamepad.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Gamepad inalámbrico negro con ergonomía mejorada.</p>
+                    <h5 class="articulos__precio">$32.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="entretenimiento">
+                    <h4 class="articulos_name">Dron SkyPilot Plegable</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/entretenimiento/dron_plegable_camara_skypilot.webp" alt="">
+                    <p class="articulos__descripcion">Dron plegable con cámara HD y vuelo estabilizado.</p>
+                    <h5 class="articulos__precio">$125.000</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="entretenimiento">
+                    <h4 class="articulos_name">Joystick PlayMax Amarillo</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/entretenimiento/joystick_inalambrico_amarillo_playmax.webp" alt="">
+                    <p class="articulos__descripcion">Joystick inalámbrico amarillo con controles precisos.</p>
+                    <h5 class="articulos__precio">$35.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="entretenimiento">
+                    <h4 class="articulos_name">Lámpara SmartBulb LED</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/entretenimiento/lampara_led_colores_smartbulb.webp" alt="">
+                    <p class="articulos__descripcion">Lámpara LED con cambio de colores y control remoto.</p>
+                    <h5 class="articulos__precio">$18.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="entretenimiento">
+                    <h4 class="articulos_name">Lámpara Lumenis Esquinera</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/entretenimiento/lampara_pie_esquinera_lumenis.webp" alt="">
+                    <p class="articulos__descripcion">Lámpara de pie esquinera con luz cálida y moderna.</p>
+                    <h5 class="articulos__precio">$38.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="entretenimiento">
+                    <h4 class="articulos_name">Lámpara GShape RGB</h4>
+                    <img class="articulos__img" src="assets/productos/entretenimiento/lampara_rgb_cargador_gshape.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Lámpara RGB con forma de G y cargador incorporado.</p>
+                    <h5 class="articulos__precio">$24.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="entretenimiento">
+                    <h4 class="articulos_name">Mini Proyector CineHome</h4>
+                    <img class="articulos__img"
+                        src="assets/productos/entretenimiento/miniproyector_portatil_cinehome.webp" alt="">
+                    <p class="articulos__descripcion">Proyector portátil HD para cine en casa donde quieras.</p>
+                    <h5 class="articulos__precio">$89.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+
+                <!-- ============ HOGAR ============ -->
+                <div class="articulos__item" data-categoria="hogar">
+                    <h4 class="articulos_name">Balanza Precision Digital</h4>
+                    <img class="articulos__img" src="assets/productos/hogar/cuchara_balanza_digital_precision.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Cuchara balanza digital para medir porciones con precisión.</p>
+                    <h5 class="articulos__precio">$10.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="hogar">
+                    <h4 class="articulos_name">Humidificador Zen Madera</h4>
+                    <img class="articulos__img" src="assets/productos/hogar/humidificador_difusor_madera_zen.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Difusor de madera con humidificador y aromaterapia.</p>
+                    <h5 class="articulos__precio">$22.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="hogar">
+                    <h4 class="articulos_name">Lámpara Lumen Escritorio</h4>
+                    <img class="articulos__img" src="assets/productos/hogar/lampara_escritorio_blanca_lumen.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Lámpara blanca LED con brazo flexible y ajustable.</p>
+                    <h5 class="articulos__precio">$19.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="hogar">
+                    <h4 class="articulos_name">Cortapelo BarberPro</h4>
+                    <img class="articulos__img" src="assets/productos/hogar/maquina_cortar_pelo_barberpro.webp" alt="">
+                    <p class="articulos__descripcion">Máquina cortapelo profesional con peines intercambiables.</p>
+                    <h5 class="articulos__precio">$28.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="hogar">
+                    <h4 class="articulos_name">Pava BoilMax Eléctrica</h4>
+                    <img class="articulos__img" src="assets/productos/hogar/pava_electrica_rapida_boilmax.webp" alt="">
+                    <p class="articulos__descripcion">Pava eléctrica rápida con apagado automático de seguridad.</p>
+                    <h5 class="articulos__precio">$32.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="hogar">
+                    <h4 class="articulos_name">Planchita SilkTech Cerámica</h4>
+                    <img class="articulos__img" src="assets/productos/hogar/planchita_pelo_ceramica_silktech.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Planchita de cerámica con temperatura ajustable y antiestática.
+                    </p>
+                    <h5 class="articulos__precio">$24.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="hogar">
+                    <h4 class="articulos_name">Reloj TimeMax Digital</h4>
+                    <img class="articulos__img" src="assets/productos/hogar/reloj_despertador_digital_timemax.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Despertador digital con pantalla LED y alarma personalizable.</p>
+                    <h5 class="articulos__precio">$15.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="hogar">
+                    <h4 class="articulos_name">Secador AirFlow Potente</h4>
+                    <img class="articulos__img" src="assets/productos/hogar/secador_pelo_potente_airflow.webp" alt="">
+                    <p class="articulos__descripcion">Secador de pelo potente con difusor y boquilla concentradora.</p>
+                    <h5 class="articulos__precio">$35.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="hogar">
+                    <h4 class="articulos_name">Soporte TV Flex Articulado</h4>
+                    <img class="articulos__img" src="assets/productos/hogar/soporte_tv_pared_articulado_flex.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Soporte articulado para TV con movimiento y giro incluido.</p>
+                    <h5 class="articulos__precio">$28.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="hogar">
+                    <h4 class="articulos_name">Timbre DoorBell Inalámbrico</h4>
+                    <img class="articulos__img" src="assets/productos/hogar/timbre_inalambrico_blanco_doorbell.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Timbre inalámbrico blanco con alcance y sonido ajustable.</p>
+                    <h5 class="articulos__precio">$14.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+
+                <!-- ============ PARLANTES ============ -->
+                <div class="articulos__item" data-categoria="parlantes">
+                    <h4 class="articulos_name">Parlante Groove LED</h4>
+                    <img class="articulos__img" src="assets/productos/parlantes/parlante_fiesta_anillo_led_groove.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Parlante con anillo LED y sonido potente para fiestas.</p>
+                    <h5 class="articulos__precio">$42.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="parlantes">
+                    <h4 class="articulos_name">Parlante NeonSound</h4>
+                    <img class="articulos__img" src="assets/productos/parlantes/parlante_luces_verdes_neonsound.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Luces verdes neón con sonido envolvente y graves profundos.</p>
+                    <h5 class="articulos__precio">$35.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="parlantes">
+                    <h4 class="articulos_name">Parlante VibePro Karaoke</h4>
+                    <img class="articulos__img" src="assets/productos/parlantes/parlante_portatil_karaoke_vibepro.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Portátil con micrófono para karaoke y fiestas en cualquier lado.
+                    </p>
+                    <h5 class="articulos__precio">$55.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="parlantes">
+                    <h4 class="articulos_name">Parlante UrbanBeat Torre</h4>
+                    <img class="articulos__img" src="assets/productos/parlantes/parlante_torre_rgb_urbanbeat.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Torre RGB con sonido 360° y luces sincronizadas.</p>
+                    <h5 class="articulos__precio">$72.500</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+                <div class="articulos__item" data-categoria="parlantes">
+                    <h4 class="articulos_name">Parlante BassMax Valija</h4>
+                    <img class="articulos__img" src="assets/productos/parlantes/parlante_valija_potente_bassmax.webp"
+                        alt="">
+                    <p class="articulos__descripcion">Potente parlante valija con graves profundos y gran volumen.</p>
+                    <h5 class="articulos__precio">$89.900</h5>
+                    <button class="articulos__btn">Consultar</button>
+                </div>
+
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer__content">
+            <h2 class="footer__slogan">Equipamiento comercial con créditos semanales</h2>
+            <p class="footer__copy">© 2026 Equipamientos Comerciales — Créditos Semanales</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
